@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,31 +51,32 @@ public class HomeActivity extends AppCompatActivity implements INetCallback{
         setContentView(R.layout.activity_home);
         init();
         initData();
-   //     handleScroll();
+        handleScroll();
     }
 
     private void initData() {
         newsLists=new ArrayList<NewsEntity>();
+        newsAdapter=new NewsAdapter(this,newsLists);
+        initHeader();
         NetRequest request=new NetRequest(this,url,10,(INetCallback)this);
         request.doLoadData();
+        recyclerView.setAdapter(newsAdapter);
     }
 
     private void init() {
-//       progressBar=(ProgressBar)findViewById(R.id.progressBar);
+   //     progressBar=(ProgressBar)findViewById(R.id.progressBar);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView=(RecyclerView)findViewById(R.id.sv_main);
-//        refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
-//        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                NetRequest request=new NetRequest(HomeActivity.this,url,10,(INetCallback) HomeActivity.this);
-//                request.doLoadData();
-//            }
-//        });
+        refreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh_layout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                NetRequest request=new NetRequest(HomeActivity.this,url,10,(INetCallback) HomeActivity.this);
+                request.doLoadData();
+            }
+        });
         url= NetEnv.NEWS_SERVER;
-//        refreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
-//                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
-//                        .getDisplayMetrics()));
+
     }
 
     @Override
@@ -90,14 +90,13 @@ public class HomeActivity extends AppCompatActivity implements INetCallback{
                 NewsEntity newsEntity=gson.fromJson(jsonArray.get(i).toString(), NewsEntity.class);
                 newsLists.add(newsEntity);
             }
-//            progressBar.setVisibility(View.GONE);
-            newsAdapter=new NewsAdapter(this,newsLists);
-            initHeader();
+       //     progressBar.setVisibility(View.GONE);
+
 
             recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setAdapter(newsAdapter);
             recyclerView.addItemDecoration(new DividerItemDecoration(
                     this, DividerItemDecoration.HORIZONTAL));
+            refreshLayout.setRefreshing(false);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -118,15 +117,17 @@ public class HomeActivity extends AppCompatActivity implements INetCallback{
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-//                if(lastPosition+1==newsLists.size()&&newState==RecyclerView.SCROLL_STATE_IDLE){
-//                    refreshLayout.setRefreshing(true);
-//                }
+                if(lastPosition==newsLists.size()&&newState==RecyclerView.SCROLL_STATE_IDLE){
+                    refreshLayout.setRefreshing(true);
+                    NetRequest request=new NetRequest(HomeActivity.this,url,10,(INetCallback) HomeActivity.this);
+                    request.doLoadData();
+                }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-//                lastPosition=mLayoutManager.findLastVisibleItemPosition();
+                lastPosition=mLayoutManager.findLastVisibleItemPosition();
             }
         });
 

@@ -84,7 +84,7 @@ public class NewsAdapter extends RecyclerView.Adapter{
     }
     @Override
     public int getItemCount() {
-        return newsLists.size()+2;
+        return newsLists.size()+1;
     }
 
     public void setHeaderView(View headerView) {
