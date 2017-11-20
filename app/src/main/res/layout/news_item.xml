@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp">
+<com.facebook.drawee.view.SimpleDraweeView
+    android:layout_height="100dp"
+    android:layout_width="100dp"
+    fresco:actualImageScaleType="focusCrop"
+    fresco:placeholderImage="@drawable/icon_loading"
+    fresco:placeholderImageScaleType="fitCenter"
+    fresco:progressBarImage="@drawable/icon_progressbar"
+    fresco:progressBarImageScaleType="centerInside"
+    fresco:progressBarAutoRotateInterval="5000"
+    fresco:failureImage="@drawable/icon_failure"
+    fresco:failureImageScaleType="centerInside"
+    fresco:retryImage="@drawable/icon_retry"
+    fresco:retryImageScaleType="centerCrop"
+    fresco:fadeDuration="5000"
+    android:id="@+id/simpleDraweeView" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:paddingLeft="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20sp"
+        android:layout_toEndOf="@+id/simpleDraweeView"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/tv_title"
+        android:layout_toEndOf="@+id/simpleDraweeView"
+        android:src="@drawable/border_line" />
+
+    <TextView
+        android:paddingLeft="3dp"
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_toEndOf="@+id/simpleDraweeView"
+        android:text="TextView" />
+    <RelativeLayout
+        android:id="@+id/rl_good"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/simpleDraweeView">
+
+        <TextView
+            android:id="@+id/item_section_info_post_user_tv_modify_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:text="最新回复：1小时前"/>
+
+        <TextView
+            android:id="@+id/item_section_info_post_user_tv_msgcount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:text="567"/>
+
+
+
+        <ImageView
+            android:id="@+id/headerview_section_post_detail_iv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/item_section_info_post_user_tv_msgcount"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/post_more_thumb_up_unclick"/>
+    </RelativeLayout>
+    <ImageView
+        android:paddingTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/rl_good"
+        android:src="@drawable/border_line" />
+</RelativeLayout>

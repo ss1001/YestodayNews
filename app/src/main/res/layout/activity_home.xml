@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shesong.yestodaynews.ui.HomeActivity"
+    android:orientation="vertical">
+<!--<include-->
+    <!--android:id="@+id/toolbar"-->
+    <!--layout="@layout/custom_toolbar"/>-->
+
+
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progressBar"-->
+        <!--style="?android:attr/progressBarStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:visibility="gone"/>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sv_main"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        </android.support.v7.widget.RecyclerView>
+
+
+</android.support.v4.widget.SwipeRefreshLayout>
