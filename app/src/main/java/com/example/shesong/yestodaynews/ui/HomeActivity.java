@@ -25,7 +25,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.handmark.pulltorefresh.library.PullToRefreshRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements INetCallback{
+public class HomeActivity extends AppCompatActivity implements INetCallback,ICustumClickListener{
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
@@ -57,6 +56,7 @@ public class HomeActivity extends AppCompatActivity implements INetCallback{
     private void initData() {
         newsLists=new ArrayList<NewsEntity>();
         newsAdapter=new NewsAdapter(this,newsLists);
+        newsAdapter.setOnClickListener(this);
         initHeader();
         NetRequest request=new NetRequest(this,url,10,(INetCallback)this);
         request.doLoadData();
@@ -135,5 +135,14 @@ public class HomeActivity extends AppCompatActivity implements INetCallback{
     @Override
     public void fail() {
 
+    }
+
+    @Override
+    public void custumClick(View view, int position) {
+        if(position==0)
+            return;
+        Intent intent=new Intent(this,NewsActivity.class);
+        intent.putExtra("url",newsLists.get(position-1).getUrl());
+        startActivity(intent);
     }
 }

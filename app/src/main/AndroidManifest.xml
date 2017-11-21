@@ -16,6 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.NewsActivity"></activity>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
     </application>
 
 </manifest>

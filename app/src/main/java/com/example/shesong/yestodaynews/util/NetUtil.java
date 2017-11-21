@@ -11,7 +11,7 @@ import java.util.Random;
 public class NetUtil {
     public static String getPhotoUrl(){
         Random random=new Random();
-        int index=random.nextInt()%10;
+        int index=Math.abs(random.nextInt()%10);
         return NetEnv.NET_SERVER+index+".jpg";
     }
 }

@@ -15,6 +15,33 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为wooyun_v1.0_wandoujia.apk
+                        def fileName = "YewstodayNews${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+    productFlavors {
+        kuan {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "kuan"]
+        }
+        xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+        }
+        qh360 {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "qh360"]
+        }
+        baidu {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+        }
+        wandoujia {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
         }
     }
 }
@@ -28,7 +55,6 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.11.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.+'
-    compile project(path: ':PullToRefresh')
     compile project(path: ':volley')
     compile 'com.google.code.gson:gson:2.2.4'
 }

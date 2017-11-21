@@ -62,8 +62,7 @@
             android:layout_marginRight="10dp"
             android:gravity="center"
             android:textColor="#999999"
-            android:textSize="12sp"
-            android:text="最新回复：1小时前"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/item_section_info_post_user_tv_msgcount"

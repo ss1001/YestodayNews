@@ -8,6 +8,7 @@ import com.example.shesong.yestodaynews.R;
 
 public class NewsActivity extends AppCompatActivity {
     private WebView wv_news;
+    private String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +18,8 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        wv_news.loadUrl("http://news.sohu.com/20171114/n522403931.shtml");
+        url=getIntent().getStringExtra("url");
+        wv_news.loadUrl(url);
     }
 
     private void initView() {
