@@ -57,4 +57,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.+'
     compile project(path: ':volley')
     compile 'com.google.code.gson:gson:2.2.4'
+    compile project(path: ':customswiperefreshlayout')
 }
